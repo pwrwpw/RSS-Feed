@@ -21,6 +21,9 @@ dependencies {
 	implementation(libs.spring.boot.starter)
 	implementation(libs.spring.boot.starter.web)
 	implementation(libs.jsoup)
+	implementation(libs.springdoc.openapi.ui)
+	implementation(libs.commons.lang3)
+	implementation project(":common")
 
 	compileOnly(libs.lombok)
 	annotationProcessor(libs.lombok)
@@ -28,7 +31,6 @@ dependencies {
 	testAnnotationProcessor(libs.lombok)
 
 	testImplementation(libs.spring.boot.starter.test)
-	implementation project(":common")
 }
 
 tasks.named('test') {

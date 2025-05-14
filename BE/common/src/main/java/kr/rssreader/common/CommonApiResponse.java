@@ -23,6 +23,14 @@ public class CommonApiResponse<T> {
         return response;
     }
 
+    public static <T> CommonApiResponse<T> error(RssErrorCode errorCode, String customMessage) {
+        CommonApiResponse<T> response = new CommonApiResponse<>();
+        response.success = false;
+        response.error = new ErrorBody(errorCode.getCode(), customMessage);
+        return response;
+    }
+
+
     public boolean isSuccess() {
         return success;
     }

@@ -1,5 +1,6 @@
 package kr.rssreader.crawler.controller;
 
+import jakarta.validation.Valid;
 import kr.rssreader.common.CommonApiResponse;
 import kr.rssreader.crawler.controller.dto.CrawlRssRequest;
 import kr.rssreader.crawler.controller.dto.CrawlRssResponse;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rss")
-public class RssCrawlController {
+@RequestMapping("/api/v1/rss")
+public class RssCrawlController implements RssCrawlSpec {
 
     private final FetchAndParseRssUseCase useCase;
 
     @PostMapping("/crawl")
     @ResponseStatus(HttpStatus.OK)
-    public CommonApiResponse<CrawlRssResponse> crawl(@RequestBody CrawlRssRequest request) {
+    public CommonApiResponse<CrawlRssResponse> crawl(@Valid @RequestBody CrawlRssRequest request) {
         CrawlRssResponse response = CrawlRssResponse.from(useCase.fetch(request.urls()));
 
         return CommonApiResponse.success(response);

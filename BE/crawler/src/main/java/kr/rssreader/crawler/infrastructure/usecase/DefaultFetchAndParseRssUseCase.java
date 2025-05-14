@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import kr.rssreader.common.RssErrorCode;
 import kr.rssreader.common.RssException;
 import kr.rssreader.crawler.domain.RssFeed;
+import kr.rssreader.crawler.domain.URL;
 import kr.rssreader.crawler.infrastructure.RssFetcher;
 import kr.rssreader.crawler.infrastructure.RssParser;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,9 @@ public class DefaultFetchAndParseRssUseCase implements FetchAndParseRssUseCase {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     @Override
-    public List<RssFeed> fetch(List<String> urls) {
+    public List<RssFeed> fetch(List<URL> urls) {
         List<CompletableFuture<List<RssFeed>>> futures = urls.stream()
-            .map(url -> fetchWithRetry(url, 3, 500))
+            .map(url -> fetchWithRetry(url.getUrl(), 3, 500))
             .toList();
 
         try {

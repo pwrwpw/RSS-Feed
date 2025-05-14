@@ -5,11 +5,15 @@
 spring-boot = "3.4.5"
 lombok = "1.18.32"
 jsoup = "1.17.2"
+springdoc = "2.8.8"
+commons-lang3 = "3.13.0"
 
 [libraries]
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
+springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
 
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }

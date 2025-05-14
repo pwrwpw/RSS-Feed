@@ -1,6 +1,7 @@
 package kr.rssreader.crawler.infrastructure.usecase;
 
 import kr.rssreader.crawler.domain.RssFeed;
+import kr.rssreader.crawler.domain.URL;
 import kr.rssreader.crawler.infrastructure.RssFetcher;
 import kr.rssreader.crawler.infrastructure.RssParser;
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,11 @@ class DefaultFetchAndParseRssUseCaseTest {
     @Test
     void 여러_URL을_정상적으로_크롤링한다() {
         // given
-        String url1 = "https://rss1.com";
-        String url2 = "https://rss2.com";
+        String rawUrl1 = "https://rss1.com";
+        String rawUrl2 = "https://rss2.com";
+        URL url1 = new URL(rawUrl1);
+        URL url2 = new URL(rawUrl2);
+
         String fakeXml = "<rss><channel></channel></rss>";
         RssFeed feed1 = RssFeed.create("테스트1", "https://link1", LocalDateTime.now());
         RssFeed feed2 = RssFeed.create("테스트2", "https://link2", LocalDateTime.now());
@@ -25,47 +29,53 @@ class DefaultFetchAndParseRssUseCaseTest {
         RssFetcher fetcher = mock(RssFetcher.class);
         RssParser parser = mock(RssParser.class);
 
-        when(fetcher.fetchRawXml(url1)).thenReturn(fakeXml);
-        when(fetcher.fetchRawXml(url2)).thenReturn(fakeXml);
+        when(fetcher.fetchRawXml(rawUrl1)).thenReturn(fakeXml);
+        when(fetcher.fetchRawXml(rawUrl2)).thenReturn(fakeXml);
         when(parser.parse(fakeXml)).thenReturn(List.of(feed1)).thenReturn(List.of(feed2));
 
         FetchAndParseRssUseCase useCase = new DefaultFetchAndParseRssUseCase(fetcher, parser);
-        List<String> urls = List.of(url1, url2);
+        List<URL> urls = List.of(url1, url2);
 
+        // when
         List<RssFeed> result = useCase.fetch(urls);
 
+        // then
         assertThat(result).hasSize(2);
         assertThat(result).extracting("title").containsExactlyInAnyOrder("테스트1", "테스트2");
 
-        verify(fetcher, times(1)).fetchRawXml(url1);
-        verify(fetcher, times(1)).fetchRawXml(url2);
+        verify(fetcher, times(1)).fetchRawXml(rawUrl1);
+        verify(fetcher, times(1)).fetchRawXml(rawUrl2);
         verify(parser, times(2)).parse(fakeXml);
     }
 
     @Test
     void 실패한_URL은_결과에서_제외된다() {
-        String url1 = "https://ok.com";
-        String url2 = "https://fail.com";
+        String rawUrl1 = "https://ok.com";
+        String rawUrl2 = "https://fail.com";
+        URL url1 = new URL(rawUrl1);
+        URL url2 = new URL(rawUrl2);
+
         String fakeXml = "<rss><channel></channel></rss>";
         RssFeed feed = RssFeed.create("테스트", "https://link", LocalDateTime.now());
 
         RssFetcher fetcher = mock(RssFetcher.class);
         RssParser parser = mock(RssParser.class);
 
-        when(fetcher.fetchRawXml(url1)).thenReturn(fakeXml);
-        when(fetcher.fetchRawXml(url2)).thenThrow(new RuntimeException("접속 불가"));
+        when(fetcher.fetchRawXml(rawUrl1)).thenReturn(fakeXml);
+        when(fetcher.fetchRawXml(rawUrl2)).thenThrow(new RuntimeException("접속 불가"));
         when(parser.parse(fakeXml)).thenReturn(List.of(feed));
 
         FetchAndParseRssUseCase useCase = new DefaultFetchAndParseRssUseCase(fetcher, parser);
-        List<String> urls = List.of(url1, url2);
+        List<URL> urls = List.of(url1, url2);
 
         List<RssFeed> result = useCase.fetch(urls);
 
         assertThat(result).hasSize(1);
         assertThat(result.get(0).getTitle()).isEqualTo("테스트");
+
         int maxRetries = 3;
-        verify(fetcher, times(1)).fetchRawXml(url1);
-        verify(fetcher, times(maxRetries)).fetchRawXml(url2);
+        verify(fetcher, times(1)).fetchRawXml(rawUrl1);
+        verify(fetcher, times(maxRetries)).fetchRawXml(rawUrl2);
     }
 
     @Test
