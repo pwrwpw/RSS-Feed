@@ -1,8 +1,8 @@
 package kr.rssreader.crawler.infrastructure;
 
+import kr.rssreader.common.RssErrorCode;
+import kr.rssreader.common.RssException;
 import kr.rssreader.crawler.domain.RssFeed;
-import kr.rssreader.crawler.common.RssException;
-import kr.rssreader.crawler.common.RssErrorCode;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

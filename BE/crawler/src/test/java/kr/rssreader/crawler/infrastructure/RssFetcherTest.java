@@ -1,7 +1,7 @@
 package kr.rssreader.crawler.infrastructure;
 
-import kr.rssreader.crawler.common.RssException;
-import kr.rssreader.crawler.common.RssErrorCode;
+import kr.rssreader.common.RssErrorCode;
+import kr.rssreader.common.RssException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.web.client.RestTemplate;

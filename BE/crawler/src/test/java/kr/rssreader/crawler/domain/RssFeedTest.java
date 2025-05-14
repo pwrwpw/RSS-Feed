@@ -1,7 +1,7 @@
 package kr.rssreader.crawler.domain;
 
-import kr.rssreader.crawler.common.RssException;
-import kr.rssreader.crawler.common.RssErrorCode;
+import kr.rssreader.common.RssErrorCode;
+import kr.rssreader.common.RssException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
