@@ -1,7 +1,7 @@
 package kr.rssreader.crawler.infrastructure;
 
-import kr.rssreader.crawler.common.RssErrorCode;
-import kr.rssreader.crawler.common.RssException;
+import kr.rssreader.common.RssErrorCode;
+import kr.rssreader.common.RssException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

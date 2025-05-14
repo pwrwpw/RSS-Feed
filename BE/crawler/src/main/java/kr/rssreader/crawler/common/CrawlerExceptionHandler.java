@@ -1,5 +1,8 @@
 package kr.rssreader.crawler.common;
 
+import kr.rssreader.common.CommonApiResponse;
+import kr.rssreader.common.RssErrorCode;
+import kr.rssreader.common.RssException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class CrawlerExceptionHandler {
 
     @ExceptionHandler(RssException.class)
     public ResponseEntity<CommonApiResponse<Void>> handleRssException(RssException e) {

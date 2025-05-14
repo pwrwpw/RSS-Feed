@@ -6,11 +6,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
+import kr.rssreader.common.RssErrorCode;
+import kr.rssreader.common.RssException;
 import kr.rssreader.crawler.domain.RssFeed;
 import kr.rssreader.crawler.infrastructure.RssFetcher;
 import kr.rssreader.crawler.infrastructure.RssParser;
-import kr.rssreader.crawler.common.RssErrorCode;
-import kr.rssreader.crawler.common.RssException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -66,8 +66,11 @@ public class DefaultFetchAndParseRssUseCase implements FetchAndParseRssUseCase {
                 scheduler.schedule(() -> {
                     tryFetch(url, attempt + 1, maxAttempts, delayMillis)
                         .whenComplete((res, err) -> {
-                            if (err != null) retry.completeExceptionally(err);
-                            else retry.complete(res);
+                            if (err != null) {
+                                retry.completeExceptionally(err);
+                            } else {
+                                retry.complete(res);
+                            }
                         });
                 }, delayMillis, TimeUnit.MILLISECONDS);
                 return retry;

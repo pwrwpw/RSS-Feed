@@ -1,8 +1,5 @@
-package kr.rssreader.crawler.common;
+package kr.rssreader.common;
 
-import lombok.Getter;
-
-@Getter
 public class CommonApiResponse<T> {
 
     private boolean success;
@@ -26,7 +23,34 @@ public class CommonApiResponse<T> {
         return response;
     }
 
-    public record ErrorBody(String code, String message) {
+    public boolean isSuccess() {
+        return success;
+    }
 
+    public T getBody() {
+        return body;
+    }
+
+    public ErrorBody getError() {
+        return error;
+    }
+
+    public static class ErrorBody {
+
+        private final String code;
+        private final String message;
+
+        public ErrorBody(String code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }

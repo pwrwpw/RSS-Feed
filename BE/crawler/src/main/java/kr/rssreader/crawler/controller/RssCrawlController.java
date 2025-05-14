@@ -1,6 +1,6 @@
 package kr.rssreader.crawler.controller;
 
-import kr.rssreader.crawler.common.CommonApiResponse;
+import kr.rssreader.common.CommonApiResponse;
 import kr.rssreader.crawler.controller.dto.CrawlRssRequest;
 import kr.rssreader.crawler.controller.dto.CrawlRssResponse;
 import kr.rssreader.crawler.infrastructure.usecase.FetchAndParseRssUseCase;

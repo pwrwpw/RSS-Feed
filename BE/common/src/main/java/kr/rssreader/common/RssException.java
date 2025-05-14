@@ -1,8 +1,5 @@
-package kr.rssreader.crawler.common;
+package kr.rssreader.common;
 
-import lombok.Getter;
-
-@Getter
 public class RssException extends RuntimeException {
 
     private final RssErrorCode errorCode;
@@ -15,5 +12,9 @@ public class RssException extends RuntimeException {
     public RssException(RssErrorCode errorCode, Throwable cause) {
         super(errorCode.getMessage(), cause);
         this.errorCode = errorCode;
+    }
+
+    public RssErrorCode getErrorCode() {
+        return errorCode;
     }
 }
