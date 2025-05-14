@@ -1,6 +1,6 @@
 package kr.rssreader.crawler.controller;
 
-import java.util.List;
+import kr.rssreader.crawler.common.CommonApiResponse;
 import kr.rssreader.crawler.controller.dto.CrawlRssRequest;
 import kr.rssreader.crawler.controller.dto.CrawlRssResponse;
 import kr.rssreader.crawler.infrastructure.usecase.FetchAndParseRssUseCase;
@@ -21,9 +21,9 @@ public class RssCrawlController {
 
     @PostMapping("/crawl")
     @ResponseStatus(HttpStatus.OK)
-    public List<CrawlRssResponse> crawl(@RequestBody CrawlRssRequest request) {
-        return useCase.fetch(request.urls()).stream()
-            .map(CrawlRssResponse::from)
-            .toList();
+    public CommonApiResponse<CrawlRssResponse> crawl(@RequestBody CrawlRssRequest request) {
+        CrawlRssResponse response = CrawlRssResponse.from(useCase.fetch(request.urls()));
+
+        return CommonApiResponse.success(response);
     }
 }
