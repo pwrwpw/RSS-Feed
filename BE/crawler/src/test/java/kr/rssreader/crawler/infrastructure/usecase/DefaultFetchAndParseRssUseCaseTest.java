@@ -3,8 +3,6 @@ package kr.rssreader.crawler.infrastructure.usecase;
 import kr.rssreader.crawler.domain.RssFeed;
 import kr.rssreader.crawler.infrastructure.RssFetcher;
 import kr.rssreader.crawler.infrastructure.RssParser;
-import kr.rssreader.crawler.infrastructure.usecase.DefaultFetchAndParseRssUseCase;
-import kr.rssreader.crawler.infrastructure.usecase.FetchAndParseRssUseCase;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
