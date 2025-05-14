@@ -7,6 +7,7 @@ public enum RssErrorCode {
     MISSING_TAG("RSS_003", "필수 태그가 누락되었습니다.", 400),
     INVALID_TITLE("RSS_004", "title은 비어 있을 수 없습니다.", 422),
     INVALID_LINK("RSS_005", "link는 비어 있을 수 없습니다.", 422),
+    INVALID_REQUEST("400", "잘못된 요청입니다.", 400),
     INTERNAL_ERROR("COMMON_500", "내부 서버 오류가 발생했습니다.", 500);
 
     private final String code;
