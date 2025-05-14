@@ -24,6 +24,7 @@ dependencies {
 	implementation(libs.springdoc.openapi.ui)
 	implementation(libs.commons.lang3)
 	implementation project(":common")
+	implementation libs.spring.cloud.eureka.client
 
 	compileOnly(libs.lombok)
 	annotationProcessor(libs.lombok)
@@ -31,6 +32,12 @@ dependencies {
 	testAnnotationProcessor(libs.lombok)
 
 	testImplementation(libs.spring.boot.starter.test)
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${libs.versions.spring.cloud.get()}"
+	}
 }
 
 tasks.named('test') {

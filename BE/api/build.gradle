@@ -21,6 +21,15 @@ dependencies {
 	implementation(libs.spring.boot.starter)
 	testImplementation(libs.spring.boot.starter.web)
 	testImplementation(libs.spring.boot.starter.test)
+
+	implementation libs.spring.cloud.gateway
+	implementation libs.spring.cloud.eureka.client
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${libs.versions.spring.cloud.get()}"
+	}
 }
 
 tasks.named('test') {
