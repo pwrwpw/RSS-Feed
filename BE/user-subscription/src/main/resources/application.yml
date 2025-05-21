@@ -1,12 +1,9 @@
 server:
-  port: 8002
-
-app:
-  url: http://localhost:8003/
+  port: 8005
 
 spring:
   application:
-    name: feed-fetcher
+    name: user-subscription
 
 eureka:
   client:
