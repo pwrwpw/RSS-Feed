@@ -4,8 +4,26 @@ server:
 spring:
   application:
     name: user-subscription
+  datasource:
+    url: ENC(+I2UMCSl/i5vPXqC8iynT9US0rTvuUSCbEK+oLsk0nKXlso3x/p6M03XTqJjwdxe94ZwHho9I9LOc/ntEW3/pA==)
+    username: ENC(yCqCdusTaQ5zQYvuOegTJQ==)
+    password: ENC(EOBD02MJmu4GjLELRd5lrw==)
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: user_subscription
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}

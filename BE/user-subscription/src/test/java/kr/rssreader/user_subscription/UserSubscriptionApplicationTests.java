@@ -1,4 +1,4 @@
-package kr.rssreader.auth;
+package kr.rssreader.user_subscription;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
