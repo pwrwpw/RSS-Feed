@@ -7,4 +7,4 @@
 
 rootProject.name = 'rss-reader'
 
-include 'common', 'crawler', 'auth', 'feed', 'api', 'core'
+include 'common', 'feed-fetcher', 'auth', 'feed-storage', 'feed-query', 'api', 'eureka-server', 'user-subscription'

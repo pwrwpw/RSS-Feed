@@ -1,7 +1,7 @@
 plugins {
 	alias(libs.plugins.spring.boot)
 	alias(libs.plugins.spring.dependency.management)
-	id("java")
+	id 'java'
 }
 
 group = 'kr.rssreader'
@@ -15,14 +15,12 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url "https://repo.spring.io/release" }
 }
 
 dependencies {
-	implementation(libs.spring.boot.starter)
-	implementation(libs.spring.boot.starter.web)
-	testImplementation(libs.spring.boot.starter.web)
-	testImplementation(libs.spring.boot.starter.test)
-	implementation libs.spring.cloud.eureka.client
+	implementation libs.spring.boot.starter.web
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 }
 
 dependencyManagement {
