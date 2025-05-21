@@ -7,10 +7,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: crawler
-          uri: lb://crawler
+        - id: feed-fetcher
+          uri: lb://feed-fetcher
           predicates:
-            - Path=/crawler/**
+            - Path=/feed-fetcher/**
         - id: core
           uri: lb://core
           predicates:
