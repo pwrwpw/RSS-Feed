@@ -1,4 +1,4 @@
-package kr.rssreader.common.config;
+package kr.rssreader.feed_fetcher.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
